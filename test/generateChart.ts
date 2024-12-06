@@ -105,7 +105,7 @@ function drawGroupedBarChart(
     .attr("text-anchor", "middle")
     .attr("font-size", "12px")
     .attr("fill", "black")
-    .text(`Unit: times`); // 显示 X轴单位
+    .text(`Operate on the number of existing elements`); // 显示 X轴单位
 
   // 添加 y 轴
   svg.append("g").call(d3.axisLeft(y));
@@ -119,7 +119,7 @@ function drawGroupedBarChart(
     .attr("text-anchor", "middle")
     .attr("font-size", "12px")
     .attr("fill", "black")
-    .text(`Unit: ns/op`); // 显示 Y轴单位
+    .text(`ns/op`); // 显示 Y轴单位
 
   // 添加图例
   const legend = svg

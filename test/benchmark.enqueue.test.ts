@@ -1,4 +1,4 @@
-import { describe, beforeEach, test, after } from "node:test";
+import { describe, test, after } from "node:test";
 import fs from "node:fs";
 import { SetQueue } from "../src/SetQueue";
 import { ArrayQueue } from "../src/ArrayQueue";
@@ -6,7 +6,15 @@ import { DequeQueue } from "../src/DequeQueue";
 import { MapQueue } from "../src/MapQueue";
 import { CircularQueue } from "../src/CircularQueue";
 import { LinkedListQueue } from "../src/LinkedListQueue";
+import { LinkedListQueue2 } from "../src/LinkedListQueue2";
+import { WebpackQueue } from "../src/WebpackQueue";
+import { WebpackQueue2 } from "../src/WebpackQueue2";
 import { drawGroupedBarChart } from "./generateChart";
+import YoctoQueue from "yocto-queue";
+
+Object.defineProperty(YoctoQueue, "name", {
+  value: "YoctoQueue",
+});
 
 const queueFactories = [
   SetQueue,
@@ -15,11 +23,15 @@ const queueFactories = [
   DequeQueue,
   CircularQueue,
   LinkedListQueue,
+  LinkedListQueue2,
+  WebpackQueue,
+  WebpackQueue2,
+  YoctoQueue,
 ];
 
 const resultMap = new Map<string, Array<{ name: string; avg: number }>>();
 
-const groupLabels = ["1e1", "1e2", "1e3", "1e4", "1e5", "1e6"];
+const groupLabels = ["0", "1e1", "1e2", "1e3", "1e4", "1e5"];
 const categoryLabels = queueFactories.map((v) => v.name);
 
 after(() => {
@@ -50,7 +62,11 @@ for (const Factory of queueFactories) {
         // 重复 100 次取平均值
         for (let t = 0; t < 100; t++) {
           // 准备数据
-          const queue = new Factory(iteration + 1);
+          const queue =
+            Factory === WebpackQueue2
+              ? new Factory([])
+              : // @ts-expect-error ignore
+                new Factory(iteration + 1);
           for (let i = 0; i < iteration; i++) {
             queue.enqueue(i);
           }
