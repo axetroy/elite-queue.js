@@ -1,0 +1,63 @@
+{
+  "name": "elite-queue",
+  "version": "0.0.1",
+  "description": "Fastest queue in the world",
+  "engines": {
+    "node": ">= 14"
+  },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "exports": {
+    "./package.json": {
+      "import": "./package.json",
+      "require": "./package.json"
+    },
+    ".": {
+      "require": {
+        "default": "./dist/cjs/index.cjs",
+        "types": "./dist/cjs/index.d.ts"
+      },
+      "import": {
+        "default": "./dist/esm/index.mjs",
+        "types": "./dist/esm/index.d.ts"
+      }
+    }
+  },
+  "scripts": {
+    "test": "node --import tsx --test",
+    "build": "npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc -p ./tsconfig.esm.json && node script/covert2mjs.cjs",
+    "build:cjs": "tsc -p ./tsconfig.cjs.json && node script/covert2cjs.cjs",
+    "watch": "tsc -p ./ --watch",
+    "benchmark": "node script/benchmark.mjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/axetroy/elite-queue.js.git"
+  },
+  "author": "Axetroy <axetroy.dev@gmail.com>",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/axetroy/elite-queue.js/issues"
+  },
+  "keywords": [
+    "queue"
+  ],
+  "homepage": "https://github.com/axetroy/elite-queue.js#readme",
+  "devDependencies": {
+    "@types/node": "^18.15.3",
+    "d3": "^7.9.0",
+    "jsdom": "^25.0.1",
+    "tsx": "4.7.3",
+    "typescript": "5.4.5",
+    "yocto-queue": "^1.1.1"
+  },
+  "private": false,
+  "directories": {
+    "test": "test"
+  },
+  "types": "./dist/cjs/index.d.ts"
+}
