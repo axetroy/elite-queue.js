@@ -24,12 +24,11 @@
     }
   },
   "scripts": {
-    "test": "node --import tsx --test",
+    "test": "node --import tsx --test ./**/*.test.ts",
     "build": "npm run build:esm && npm run build:cjs",
     "build:esm": "tsc -p ./tsconfig.esm.json && node script/covert2mjs.cjs",
     "build:cjs": "tsc -p ./tsconfig.cjs.json && node script/covert2cjs.cjs",
-    "watch": "tsc -p ./ --watch",
-    "benchmark": "node script/benchmark.mjs"
+    "watch": "tsc -p ./ --watch"
   },
   "files": [
     "dist"

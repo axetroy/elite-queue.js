@@ -1,3 +1,3 @@
-import { ArrayQueue } from "../dist/cjs/ArrayQueue.cjs";
+import { ArrayQueue } from "./ArrayQueue";
 
 export { ArrayQueue as Queue };

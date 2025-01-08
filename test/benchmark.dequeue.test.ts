@@ -67,6 +67,11 @@ for (const Factory of queueFactories) {
               ? new Factory([])
               : // @ts-expect-error ignore
                 new Factory(iteration + 1);
+
+          // 代码预热
+          queue.enqueue(0);
+          queue.dequeue();
+
           for (let i = 0; i < iteration; i++) {
             queue.enqueue(i);
           }
